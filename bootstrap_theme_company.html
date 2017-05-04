@@ -167,6 +167,40 @@
         color: #f4511e;
       }
 
+      .slideanim {visibility:hidden;}
+      .slide {
+          /* The name of the animation */
+          animation-name: slide;
+          -webkit-animation-name: slide;
+          /* The duration of the animation */
+          animation-duration: 1s;
+          -webkit-animation-duration: 1s;
+          /* Make the element visible */
+          visibility: visible;
+      }
+
+      /* Go from 0% to 100% opacity (see-through) and specify the percentage from when to slide in the element along the Y-axis */
+      @keyframes slide {
+          0% {
+              opacity: 0;
+              transform: translateY(70%);
+          }
+          100% {
+              opacity: 1;
+              transform: translateY(0%);
+          }
+      }
+      @-webkit-keyframes slide {
+          0% {
+              opacity: 0;
+              -webkit-transform: translateY(70%);
+          }
+          100% {
+              opacity: 1;
+              -webkit-transform: translateY(0%);
+          }
+      }
+
     </style>
   </head>
 
@@ -238,7 +272,7 @@
       <h2>SERVICES</h2>
       <h4>What we offer</h4>
       <br>
-      <div class="row">
+      <div class="row slideanim">
         <div class="col-sm-4">
           <span class="glyphicon glyphicon-off logo-small"></span>
           <h4>POWER</h4>
@@ -255,7 +289,7 @@
           <p>Lorem ipsum dolor sit amet..</p>
         </div>
       </div>
-      <div class="row">
+      <div class="row slideanim">
         <div class="col-sm-4">
           <span class="glyphicon glyphicon-leaf logo-small"></span>
           <h4>GREEN</h4>
@@ -337,7 +371,7 @@
         <h2>Pricing</h2>
         <h4>Choose a payment play that works for you</h4>
       </div>
-      <div class="row">
+      <div class="row slideanim">
         <div class="col-sm-4">
           <div class="panel panel-default text-center">
             <div class="panel-heading">
@@ -461,6 +495,17 @@
           }
         })
       })
+
+      $(window).scroll(function() {
+      $(".slideanim").each(function(){
+        var pos = $(this).offset().top;
+
+        var winTop = $(window).scrollTop();
+        if (pos < winTop + 600) {
+          $(this).addClass("slide");
+        }
+      });
+    });
     </script>
 
   </body>
